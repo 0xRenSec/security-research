@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-11_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/advisories-12_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/peak_severity-9.1_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -14,7 +14,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 11  (GitHub Security Advisories, credited)
+  Advisories filed ........ 12  (GitHub Security Advisories, credited)
   Peak severity ........... 9.1 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -38,6 +38,7 @@
 | 🟠 **7.5** | `@hyperledger/identus-sdk` · npm | VP verifier never binds the presenter to the credential subject + no nonce → holder impersonation / presentation replay `CWE-294` | [GHSA-9cv4-xvv9-xg8m](https://github.com/hyperledger-identus/sdk-ts/security/advisories/GHSA-9cv4-xvv9-xg8m) |
 | 🟠 **7.5** | `@agledger/verify-core` · npm | Fail-open COSE verify — a 64-byte all-zero signature is accepted as "unsigned" → `valid:true` (even with the high-assurance options) `CWE-347` | [GHSA-8ppx-mwp3-vvmf](https://github.com/agledger-ai/verify-core/security/advisories/GHSA-8ppx-mwp3-vvmf) |
 | 🟠 **7.4** | `jwt-bearer-client-auth` · npm | JWT algorithm confusion (RS256→HS256) — asymmetric public key + mixed HS/RS allowlist on jsonwebtoken 8.x → forge client-assertions `CWE-347` | [GHSA-vmwc-xvv7-v2xq](https://github.com/OADA/jwt-bearer-client-auth/security/advisories/GHSA-vmwc-xvv7-v2xq) |
+| 🟡 **6.8** | `encrypt_shared_preferences` · pub.dev | AES-CTR with a constant IV equal to the key for every record → keystream reuse (two-time pad) + unauthenticated ciphertext `CWE-329` | [GHSA-3q27-hwcf-p55w](https://github.com/xaldarof/encrypted-shared-preferences/security/advisories/GHSA-3q27-hwcf-p55w) |
 
 <sub>Reported via GitHub Security Advisory, credit accepted. CVE IDs land on maintainer publication.</sub>
 
