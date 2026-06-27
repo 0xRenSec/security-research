@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-14_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/advisories-15_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/peak_severity-9.1_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -14,7 +14,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 14  (GitHub Security Advisories, credited)  · 4 Critical
+  Advisories filed ........ 15  (GitHub Security Advisories, credited)  · 4 Critical
   Peak severity ........... 9.1 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -31,6 +31,7 @@
 | 🔴 **9.1** | walt.id Community Stack · Maven/JVM | Credential issuer impersonation — token `x5c` cert trusted as the issuer key, no trust-anchor / `iss` binding `CWE-295` | [GHSA-f8cq-qgpw-v6vc](https://github.com/walt-id/waltid-identity/security/advisories/GHSA-f8cq-qgpw-v6vc) |
 | 🔴 **9.1** | `@solidus-network/auth` · npm | Auth bypass — VP signature verified against an attacker-controlled `proof.verificationMethod`, no binding to the holder DID → authenticate as anyone `CWE-290` | [GHSA-hqg3-xcww-rfm7](https://github.com/solidusnetwork/sdk/security/advisories/GHSA-hqg3-xcww-rfm7) |
 | 🔴 **9.1** | `auth-framework` · crates.io | Unauthenticated WebAuthn registration — no attestation / proof-of-possession → register an attacker key for any username → account takeover `CWE-306` | [GHSA-cw9x-gg6m-9cqr](https://github.com/ciresnave/auth-framework/security/advisories/GHSA-cw9x-gg6m-9cqr) |
+| 🟠 **8.8** | `@usex/mikrotik-mcp` · npm (MCP) | RouterOS command injection (RCE) — unconstrained tool args interpolated raw into router console commands, incl. auto-executed READ tools → arbitrary router commands via MCP prompt injection `CWE-77` | [GHSA-r4cq-vhjf-mppv](https://github.com/ali-master/mikrotik-mcp/security/advisories/GHSA-r4cq-vhjf-mppv) |
 | 🟠 **7.5** | `@kazuph/mcp-fetch` · npm | SSRF guard bypass → cloud-metadata `CWE-918` | [GHSA-2vq8-9p6f-xwj5](https://github.com/kazuph/mcp-fetch/security/advisories/GHSA-2vq8-9p6f-xwj5) |
 | 🟠 **7.5** | `web5-go` · Go | did:web issuer impersonation `CWE-347` | [GHSA-vjhq-pfx7-56h5](https://github.com/decentralized-identity/web5-go/security/advisories/GHSA-vjhq-pfx7-56h5) |
 | 🟠 **7.5** | `ssi` (Affinidi) · Dart/pub | JWT-VC issuer impersonation — verifying key bound to the `kid`'s own DID `CWE-347` | [GHSA-ccqw-76rj-rrcq](https://github.com/affinidi/affinidi-ssi-dart/security/advisories/GHSA-ccqw-76rj-rrcq) |
