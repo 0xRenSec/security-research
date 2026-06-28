@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
   <img src="https://img.shields.io/badge/advisories-18_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-13-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/runnable_PoCs-14-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.1_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 18  (GitHub Security Advisories, credited)  · 5 Critical · 13 with runnable PoCs
+  Advisories filed ........ 18  (GitHub Security Advisories, credited)  · 5 Critical · 14 with runnable PoCs
   Peak severity ........... 9.1 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
