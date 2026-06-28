@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-16_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/advisories-17_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/peak_severity-9.1_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -14,7 +14,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 16  (GitHub Security Advisories, credited)  · 4 Critical
+  Advisories filed ........ 17  (GitHub Security Advisories, credited)  · 4 Critical · 7 with runnable PoCs
   Peak severity ........... 9.1 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -43,6 +43,7 @@
 | 🟡 **6.8** | `encrypt_shared_preferences` · pub.dev | AES-CTR with a constant IV equal to the key for every record → keystream reuse (two-time pad) + unauthenticated ciphertext `CWE-329` | [GHSA-3q27-hwcf-p55w](https://github.com/xaldarof/encrypted-shared-preferences/security/advisories/GHSA-3q27-hwcf-p55w) |
 | 🟡 **6.2** | `keechain` · crates.io | Bitcoin BIP39 seed encrypted at rest with an unsalted single-SHA256 password KDF → offline GPU brute-force → seed recovery `CWE-759` | [GHSA-4f56-3j96-qp5w](https://github.com/yukibtc/keechain/security/advisories/GHSA-4f56-3j96-qp5w) |
 | 🟡 **5.9** | Identus KMP SDK · Maven (Hyperledger) | VP verifier never verifies the presentation envelope signature → holder identity unauthenticated → present any victim's credential `CWE-347` | [GHSA-2p4v-p249-fqjx](https://github.com/hyperledger-identus/sdk-kmp/security/advisories/GHSA-2p4v-p249-fqjx) |
+| 🟠 **8.1** | `unzip-crx` / `unzip-crx-3` · npm | Zip-Slip arbitrary file write on Windows — backslash traversal in CRX entries survives jszip normalization → `path.join` escapes destination → RCE `CWE-22` | [GHSA-hvqj-ph3p-f27f](https://github.com/peerigon/unzip-crx/security/advisories/GHSA-hvqj-ph3p-f27f) |
 
 <sub>Reported via GitHub Security Advisory, credit accepted. CVE IDs land on maintainer publication.</sub>
 
