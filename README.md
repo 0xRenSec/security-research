@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-19_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-15-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-20_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-16-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 19  (GitHub Security Advisories, credited)  · 6 Critical · 15 with runnable PoCs
+  Advisories filed ........ 20  (GitHub Security Advisories, credited)  · 6 Critical · 16 with runnable PoCs
   Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -35,6 +35,7 @@
 | 🔴 **9.8** | `flyimg/flyimg` · Composer/Docker | Unauthenticated OS command injection (RCE) — `webp-method` URL option concatenated unescaped into the ImageMagick command → `proc_open` `CWE-78` | [GHSA-rmgv-gcwh-2pqh](https://github.com/flyimg/flyimg/security/advisories/GHSA-rmgv-gcwh-2pqh) |
 | 🔴 **9.8** | Xinference (distributed) / `xoscar` · pip | Unauthenticated remote code execution — the xoscar actor-pool channel deserializes network frames with `cloudpickle.loads()` (no auth/HMAC), distributed mode binds `0.0.0.0` → one crafted pickle frame → RCE `CWE-502` | [GHSA-jw93-m5fq-h5vc](https://github.com/xorbitsai/inference/security/advisories/GHSA-jw93-m5fq-h5vc) |
 | 🟠 **8.8** | `@usex/mikrotik-mcp` · npm (MCP) | RouterOS command injection (RCE) — unconstrained tool args interpolated raw into router console commands, incl. auto-executed READ tools → arbitrary router commands via MCP prompt injection `CWE-77` | [GHSA-r4cq-vhjf-mppv](https://github.com/ali-master/mikrotik-mcp/security/advisories/GHSA-r4cq-vhjf-mppv) |
+| 🟠 **8.8** | `feast` · pip | Registry-server RCE (incomplete fix of CVE-2025-11157) — `ApplyMaterialization` deserializes the feature-transformation UDF with `dill.loads()` before the authorization check (the `skip_udf` hardening on `ApplyFeatureView` is missing) → authz-bypass / unauthenticated RCE `CWE-502` | [GHSA-q4rh-59wh-w4jr](https://github.com/feast-dev/feast/security/advisories/GHSA-q4rh-59wh-w4jr) |
 | 🟠 **7.5** | `@kazuph/mcp-fetch` · npm | SSRF guard bypass → cloud-metadata `CWE-918` | [GHSA-2vq8-9p6f-xwj5](https://github.com/kazuph/mcp-fetch/security/advisories/GHSA-2vq8-9p6f-xwj5) |
 | 🟠 **7.5** | `web5-go` · Go | did:web issuer impersonation `CWE-347` | [GHSA-vjhq-pfx7-56h5](https://github.com/decentralized-identity/web5-go/security/advisories/GHSA-vjhq-pfx7-56h5) |
 | 🟠 **7.5** | `ssi` (Affinidi) · Dart/pub | JWT-VC issuer impersonation — verifying key bound to the `kid`'s own DID `CWE-347` | [GHSA-ccqw-76rj-rrcq](https://github.com/affinidi/affinidi-ssi-dart/security/advisories/GHSA-ccqw-76rj-rrcq) |
