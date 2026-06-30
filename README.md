@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-21_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-17-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-24_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-20-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 21  (GitHub Security Advisories, credited)  · 6 Critical · 17 with runnable PoCs
+  Advisories filed ........ 24  (GitHub Security Advisories, credited)  · 6 Critical · 20 with runnable PoCs
   Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -45,7 +45,10 @@
 | 🟠 **7.5** | `@hyperledger/identus-sdk` · npm | VP verifier never binds the presenter to the credential subject + no nonce → holder impersonation / presentation replay `CWE-294` | [GHSA-9cv4-xvv9-xg8m](https://github.com/hyperledger-identus/sdk-ts/security/advisories/GHSA-9cv4-xvv9-xg8m) |
 | 🟠 **7.5** | `@agledger/verify-core` · npm | Fail-open COSE verify — a 64-byte all-zero signature is accepted as "unsigned" → `valid:true` (even with the high-assurance options) `CWE-347` | [GHSA-8ppx-mwp3-vvmf](https://github.com/agledger-ai/verify-core/security/advisories/GHSA-8ppx-mwp3-vvmf) |
 | 🟠 **7.4** | `jwt-bearer-client-auth` · npm | JWT algorithm confusion (RS256→HS256) — asymmetric public key + mixed HS/RS allowlist on jsonwebtoken 8.x → forge client-assertions `CWE-347` | [GHSA-vmwc-xvv7-v2xq](https://github.com/OADA/jwt-bearer-client-auth/security/advisories/GHSA-vmwc-xvv7-v2xq) |
+| 🟠 **7.5** | `jose_plus` · Dart/pub.dev | JWS signature forgery — the verifier trusts an attacker-supplied embedded `jwk` header as the signing key (no binding to a trusted key) → forge any signed token; same defect as the parent `jose` (CVE-2026-34240) `CWE-347` | [GHSA-vm9r-h74p-hg97](https://github.com/Bdaya-Dev/jose/security/advisories/GHSA-vm9r-h74p-hg97) |
+| 🟠 **7.2** | `marqo` · pip/Docker | Unauthenticated SSRF — a search-query string is fetched as a URL gated only by a syntax-only `validators.url` check (accepts loopback / RFC-1918 / `169.254.169.254`); default `0.0.0.0:8882`, no auth → blind internal-network request forgery `CWE-918` | [GHSA-v398-fp89-9j76](https://github.com/marqo-ai/marqo/security/advisories/GHSA-v398-fp89-9j76) |
 | 🟡 **6.8** | `encrypt_shared_preferences` · pub.dev | AES-CTR with a constant IV equal to the key for every record → keystream reuse (two-time pad) + unauthenticated ciphertext `CWE-329` | [GHSA-3q27-hwcf-p55w](https://github.com/xaldarof/encrypted-shared-preferences/security/advisories/GHSA-3q27-hwcf-p55w) |
+| 🟡 **6.5** | `premailer` · PyPI | Default-on SSRF — remote CSS / external resources are fetched while inlining HTML with no scheme/host restriction in the default config → reach internal services `CWE-918` | [GHSA-9pmc-p236-855h](https://github.com/peterbe/premailer/security/advisories/GHSA-9pmc-p236-855h) |
 | 🟡 **6.2** | `keechain` · crates.io | Bitcoin BIP39 seed encrypted at rest with an unsalted single-SHA256 password KDF → offline GPU brute-force → seed recovery `CWE-759` | [GHSA-4f56-3j96-qp5w](https://github.com/yukibtc/keechain/security/advisories/GHSA-4f56-3j96-qp5w) |
 | 🟡 **5.9** | Identus KMP SDK · Maven (Hyperledger) | VP verifier never verifies the presentation envelope signature → holder identity unauthenticated → present any victim's credential `CWE-347` | [GHSA-2p4v-p249-fqjx](https://github.com/hyperledger-identus/sdk-kmp/security/advisories/GHSA-2p4v-p249-fqjx) |
 | 🟠 **8.1** | `unzip-crx` / `unzip-crx-3` · npm | Zip-Slip arbitrary file write on Windows — backslash traversal in CRX entries survives jszip normalization → `path.join` escapes destination → RCE `CWE-22` | [GHSA-hvqj-ph3p-f27f](https://github.com/peerigon/unzip-crx/security/advisories/GHSA-hvqj-ph3p-f27f) |
