@@ -68,7 +68,7 @@
 
 ---
 
-### 🔧 How I work
+### 🔧 Methodology
 **Real bug × reachable default path × current adoption × novelty** — anything that misses the bar gets dropped,
 not dressed up. Every finding is pinned to file:line, checked against OSV/GHSA/NVD for novelty, proven with a
 **local-only PoC** (no live exploitation, no secrets), and disclosed to the vendor first. Credibility is the flex.
