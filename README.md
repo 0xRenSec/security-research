@@ -54,7 +54,7 @@
 | 24 | 🟠 **8.1** | `unzip-crx` / `unzip-crx-3` · npm | Zip-Slip arbitrary file write on Windows — backslash traversal in CRX entries survives jszip normalization → `path.join` escapes destination → RCE `CWE-22` | [GHSA-hvqj-ph3p-f27f](https://github.com/peerigon/unzip-crx/security/advisories/GHSA-hvqj-ph3p-f27f) | 🔄 pending |
 | 25 | 🟠 **8.8** | `@sworddut/mcp-ffmpeg-helper` · npm (MCP) | OS command injection (RCE) — MCP tool arguments (`extraOptions` / `options` / `format` …) are interpolated raw into a `spawn(…, {shell:true})` ffmpeg command string with no escaping or allow-list → arbitrary host command, reachable via MCP indirect prompt injection `CWE-78` | MITRE — CVE pending | 🔄 pending |
 
-<sub>Rows 1–24 reported via GitHub Security Advisory (credit accepted); row 25 routed via MITRE + maintainer (coordinated disclosure in progress). CVE IDs land on publication.</sub>
+<sub>Rows 1–24 reported via GitHub Security Advisory (credit accepted); row 25 — MITRE request filed 2026-07-03 (coordinated disclosure; CVE pending). CVE IDs land on publication.</sub>
 
 ---
 
