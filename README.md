@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-25_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-21-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-26_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-22-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 25  (24 GitHub Security Advisories, credited · 1 via MITRE)  · 7 Critical · 21 with runnable PoCs
+  Advisories filed ........ 26  (25 GitHub Security Advisories, credited · 1 via MITRE)  · 7 Critical · 22 with runnable PoCs
   Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -53,8 +53,9 @@
 | 23 | 🟡 **5.9** | Identus KMP SDK · Maven (Hyperledger) | VP verifier never verifies the presentation envelope signature → holder identity unauthenticated → present any victim's credential `CWE-347` | [GHSA-2p4v-p249-fqjx](https://github.com/hyperledger-identus/sdk-kmp/security/advisories/GHSA-2p4v-p249-fqjx) | 🔄 pending |
 | 24 | 🟠 **8.1** | `unzip-crx` / `unzip-crx-3` · npm | Zip-Slip arbitrary file write on Windows — backslash traversal in CRX entries survives jszip normalization → `path.join` escapes destination → RCE `CWE-22` | [GHSA-hvqj-ph3p-f27f](https://github.com/peerigon/unzip-crx/security/advisories/GHSA-hvqj-ph3p-f27f) | 🔄 pending |
 | 25 | 🟠 **8.8** | `@sworddut/mcp-ffmpeg-helper` · npm (MCP) | OS command injection (RCE) — MCP tool arguments (`extraOptions` / `options` / `format` …) are interpolated raw into a `spawn(…, {shell:true})` ffmpeg command string with no escaping or allow-list → arbitrary host command, reachable via MCP indirect prompt injection `CWE-78` | MITRE — CVE pending | 🔄 pending |
+| 26 | 🟠 **7.3** | `ssrfcheck` · npm | SSRF-guard bypass via NFKD parser differential — `isSSRFSafeURL()` validates the NFKD-normalized URL, but the app fetches the raw input; fullwidth `＃` / `？` fold the host boundary so the checker approves a URL whose real host is internal (loopback / RFC-1918 / `169.254.169.254`) `CWE-918` | [GHSA-vjf4-72mq-xh5v](https://github.com/felippe-regazio/ssrfcheck/security/advisories/GHSA-vjf4-72mq-xh5v) | 🔄 pending |
 
-<sub>Rows 1–24 reported via GitHub Security Advisory (credit accepted); row 25 — MITRE request filed 2026-07-03 (coordinated disclosure; CVE pending). CVE IDs land on publication.</sub>
+<sub>Reported via GitHub Security Advisory (credit accepted), except row 25 (MITRE-routed, no PVR). CVE IDs land on publication.</sub>
 
 ---
 
