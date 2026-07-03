@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-28_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-24-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-30_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-26-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 28  (27 GitHub Security Advisories, credited · 1 via MITRE)  · 7 Critical · 24 with runnable PoCs
+  Advisories filed ........ 30  (27 GitHub Security Advisories, credited · 3 via MITRE)  · 7 Critical · 26 with runnable PoCs
   Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -56,8 +56,10 @@
 | 26 | 🟠 **7.3** | `ssrfcheck` · npm | SSRF-guard bypass via NFKD parser differential — `isSSRFSafeURL()` validates the NFKD-normalized URL, but the app fetches the raw input; fullwidth `＃` / `？` fold the host boundary so the checker approves a URL whose real host is internal (loopback / RFC-1918 / `169.254.169.254`) `CWE-918` | [GHSA-vjf4-72mq-xh5v](https://github.com/felippe-regazio/ssrfcheck/security/advisories/GHSA-vjf4-72mq-xh5v) | 🔄 pending |
 | 27 | 🟡 **5.3** | `next-sitemap` · npm | XML injection (sitemap poisoning / content-spoofing) — core `<url>` fields (`loc`/`lastmod`/`changefreq`/`priority`) and `alternateRefs` `href`/`hreflang` are emitted unescaped while news/image/video text fields are escaped, so a dynamic sitemap built from attacker-influenced data can be poisoned with forged `<url>` entries. Served as `application/xml` → no XSS/RCE `CWE-91` | [GHSA-xh82-92vx-jh65](https://github.com/iamvishnusankar/next-sitemap/security/advisories/GHSA-xh82-92vx-jh65) | 🔄 pending |
 | 28 | 🟠 **7.3** | `dssrf` · npm | SSRF-guard bypass via NFKC parser differential — `is_url_safe()` validates the NFKC-normalized URL (and rejects userinfo / internal hosts), but the app fetches the raw input; fullwidth `＃` / `？` / `／` fold the delimiters so the checker sees host `example.com` with empty userinfo while a normal HTTP client connects to `127.0.0.1` / RFC-1918 / `169.254.169.254` — defeating the library's own userinfo guard `CWE-918` | [GHSA-xx33-w569-xg7j](https://github.com/HackingRepo/dssrf-js/security/advisories/GHSA-xx33-w569-xg7j) | 🔄 pending |
+| 29 | 🟠 **7.5** | `@blazity/next-image-proxy` · npm | Unauthenticated SSRF / allow-list bypass — the proxy follows 3xx redirects without re-validating the target (an allow-listed origin redirects to an internal host / `169.254.169.254` and the response is streamed back), and matches the allow-list with an unanchored regex `CWE-918` | MITRE — CVE pending | 🔄 pending |
+| 30 | 🟠 **7.3** | `private-ip` · npm | SSRF-guard bypass via IPv4-mapped IPv6 — `ipv6_check` matches only the dotted `::ffff:127.0.0.1`, never the hex `::ffff:7f00:1` that WHATWG `new URL()` emits, so the guard approves loopback / cloud-metadata `CWE-918` | MITRE — CVE requested | 🔄 pending |
 
-<sub>Reported via GitHub Security Advisory (credit accepted), except row 25 (MITRE-routed, no PVR). CVE IDs land on publication.</sub>
+<sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 (MITRE-routed, no PVR). CVE IDs land on publication.</sub>
 
 ---
 
