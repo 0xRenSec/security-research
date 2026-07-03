@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-27_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-23-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-28_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-24-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
@@ -15,7 +15,7 @@
 
 ### ⚡ By the numbers
 ```
-  Advisories filed ........ 27  (26 GitHub Security Advisories, credited · 1 via MITRE)  · 7 Critical · 23 with runnable PoCs
+  Advisories filed ........ 28  (27 GitHub Security Advisories, credited · 1 via MITRE)  · 7 Critical · 24 with runnable PoCs
   Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
   Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
   Malware caught .......... 8 packages / 4 supply-chain campaigns
@@ -55,6 +55,7 @@
 | 25 | 🟠 **8.8** | `@sworddut/mcp-ffmpeg-helper` · npm (MCP) | OS command injection (RCE) — MCP tool arguments (`extraOptions` / `options` / `format` …) are interpolated raw into a `spawn(…, {shell:true})` ffmpeg command string with no escaping or allow-list → arbitrary host command, reachable via MCP indirect prompt injection `CWE-78` | MITRE — CVE pending | 🔄 pending |
 | 26 | 🟠 **7.3** | `ssrfcheck` · npm | SSRF-guard bypass via NFKD parser differential — `isSSRFSafeURL()` validates the NFKD-normalized URL, but the app fetches the raw input; fullwidth `＃` / `？` fold the host boundary so the checker approves a URL whose real host is internal (loopback / RFC-1918 / `169.254.169.254`) `CWE-918` | [GHSA-vjf4-72mq-xh5v](https://github.com/felippe-regazio/ssrfcheck/security/advisories/GHSA-vjf4-72mq-xh5v) | 🔄 pending |
 | 27 | 🟡 **5.3** | `next-sitemap` · npm | XML injection (sitemap poisoning / content-spoofing) — core `<url>` fields (`loc`/`lastmod`/`changefreq`/`priority`) and `alternateRefs` `href`/`hreflang` are emitted unescaped while news/image/video text fields are escaped, so a dynamic sitemap built from attacker-influenced data can be poisoned with forged `<url>` entries. Served as `application/xml` → no XSS/RCE `CWE-91` | [GHSA-xh82-92vx-jh65](https://github.com/iamvishnusankar/next-sitemap/security/advisories/GHSA-xh82-92vx-jh65) | 🔄 pending |
+| 28 | 🟠 **7.3** | `dssrf` · npm | SSRF-guard bypass via NFKC parser differential — `is_url_safe()` validates the NFKC-normalized URL (and rejects userinfo / internal hosts), but the app fetches the raw input; fullwidth `＃` / `？` / `／` fold the delimiters so the checker sees host `example.com` with empty userinfo while a normal HTTP client connects to `127.0.0.1` / RFC-1918 / `169.254.169.254` — defeating the library's own userinfo guard `CWE-918` | [GHSA-xx33-w569-xg7j](https://github.com/HackingRepo/dssrf-js/security/advisories/GHSA-xx33-w569-xg7j) | 🔄 pending |
 
 <sub>Reported via GitHub Security Advisory (credit accepted), except row 25 (MITRE-routed, no PVR). CVE IDs land on publication.</sub>
 
