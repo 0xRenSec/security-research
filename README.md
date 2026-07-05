@@ -1,25 +1,44 @@
-<h1 align="center">🛡️ 0xRenSec — Security Research</h1>
+<h1 align="center">0xRenSec</h1>
 
-<p align="center"><i>Independent vulnerability research · coordinated disclosure · zero false positives</i></p>
+<p align="center"><b>Independent vulnerability research</b> · coordinated disclosure · every finding proven with a runnable PoC</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
   <img src="https://img.shields.io/badge/advisories-30_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/runnable_PoCs-26-2ea043?style=for-the-badge">
-  <img src="https://img.shields.io/badge/peak_severity-9.8_CRITICAL-c5221f?style=for-the-badge">
-  <img src="https://img.shields.io/badge/pipeline-50%2B_findings-fb8500?style=for-the-badge">
-  <img src="https://img.shields.io/badge/disclosure-coordinated-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
+  <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
+  <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
 </p>
 
 ---
 
-### ⚡ By the numbers
+```console
+$ whoami
+0xRenSec — independent vulnerability researcher.
+
+I go after real bugs in software people actually run: identity / JWT verification,
+SSRF guards that don't guard, deserialization sinks, wallet key generation, MCP tool
+servers. Every finding here is pinned to a line of source, checked for novelty against
+OSV / GHSA / NVD, and proven with a PoC I run end-to-end against the real, published
+package — no theory, no "could be exploitable", no live targets. If it doesn't clear
+that bar, I drop it. Credibility is the whole game.
+
+$ cat disclosure_policy.txt
+Vendor first. Loopback-only PoCs, synthetic secrets, nobody else's systems. Details
+stay embargoed until there's a fix or a CVE. The Status column below tracks that live.
 ```
-  Advisories filed ........ 30  (27 GitHub Security Advisories, credited · 3 via MITRE)  · 7 Critical · 26 with runnable PoCs
-  Peak severity ........... 9.8 CRITICAL  (CVSS v3.1)
-  Confirmed pipeline ...... 50+ novel findings across 11 ecosystems
-  Malware caught .......... 8 packages / 4 supply-chain campaigns
-  False positives shipped . 0
+
+---
+
+### ⚡ By the numbers
+
+```text
+  Advisories filed ....... 30    27 GitHub Security Advisories (credit accepted) + 3 via MITRE
+  Critical severity ...... 7     peak 9.8 — unauthenticated RCE
+  Proven with a PoC ...... 26    runnable · local-only · actually executed
+  Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
+  Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
 
 ---
@@ -59,11 +78,11 @@
 | 29 | 🟠 **7.5** | `@blazity/next-image-proxy` · npm | Unauthenticated SSRF / allow-list bypass — the proxy follows 3xx redirects without re-validating the target (an allow-listed origin redirects to an internal host / `169.254.169.254` and the response is streamed back), and matches the allow-list with an unanchored regex `CWE-918` · CVSS v4.0 8.7 High | MITRE — CVE pending | 🔄 pending |
 | 30 | 🟠 **7.3** | `private-ip` · npm | SSRF-guard bypass via IPv4-mapped IPv6 — `ipv6_check` matches only the dotted `::ffff:127.0.0.1`, never the hex `::ffff:7f00:1` that WHATWG `new URL()` emits, so the guard approves loopback / cloud-metadata `CWE-918` · CVSS v4.0 8.8 High | MITRE — CVE requested | 🔄 pending |
 
-<sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability semantics (calculator-derived, cross-checked between two independent implementations). The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount (so a couple of network/unauth confidentiality+integrity bugs land in Critical), occasionally lower for blind / subsequent-scope SSRF.</sub>
+<sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability, cross-checked between two independent calculators. The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount, occasionally lower for blind / subsequent-scope SSRF.</sub>
 
 ---
 
-### 🧪 Pipeline `(coordinated disclosure in progress — details drop on fix/CVE)`
+### 🧪 Pipeline &nbsp;<sub>`coordinated disclosure in progress — details drop on fix / CVE`</sub>
 
 | | Count | Hunting ground |
 |:--:|:--:|:--|
@@ -74,9 +93,30 @@
 
 ---
 
-### 🔧 Methodology
-**Real bug × reachable default path × current adoption × novelty** — anything that misses the bar gets dropped,
-not dressed up. Every finding is pinned to file:line, checked against OSV/GHSA/NVD for novelty, proven with a
-**local-only PoC** (no live exploitation, no secrets), and disclosed to the vendor first. Credibility is the flex.
+### 🔬 How I work
 
-<p align="center"><sub><b>0xRenSec</b> · reach out via GitHub for coordinated-disclosure matters</sub></p>
+Four filters, in order — **is it a real bug**, is it on a **reachable default path**, does the package
+have **current adoption**, and is it **novel** (nothing already in OSV / GHSA / NVD). Miss any one and it
+gets dropped; I'd rather ship ten findings that all hold than fifty that mostly don't. Then I write the PoC
+and *run* it against the real published package — full reflection, a minted token, a command that actually
+executes — not a screenshot of a code path. Every one is pinned to file:line so a maintainer can land on the
+sink in seconds.
+
+### 🤝 Disclosure
+
+Coordinated, every time. I report privately to the maintainer first — GitHub Private Vulnerability Reporting
+where it's on, MITRE where it isn't — keep the details embargoed until there's a fix or a CVE, and I never
+touch a system that isn't mine. Every PoC in this portfolio runs against loopback with synthetic secrets. If
+a maintainer wants the patch written too, I'll write it.
+
+### 📡 Live tracking
+
+The **Status** column isn't hand-edited. A tracker I wrote re-reads every GHSA in the table against GitHub's
+global Advisory Database once a day and flips 🔄 → ✅ the moment a CVE is minted in my name, then pings me —
+so what you're reading is current.
+
+<sub>🔄 pending — in maintainer triage / unpublished &nbsp;·&nbsp; ✅ CVE assigned & credited to 0xRenSec &nbsp;·&nbsp; 🚫 withdrawn</sub>
+
+---
+
+<p align="center"><sub><code>0xRenSec</code> &nbsp;·&nbsp; coordinated disclosure &nbsp;·&nbsp; reach me through GitHub</sub></p>
