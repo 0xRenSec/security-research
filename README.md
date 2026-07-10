@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-30_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-26-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-31_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-27-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
@@ -34,9 +34,9 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  Advisories filed ....... 30    27 GitHub Security Advisories (credit accepted) + 3 via MITRE
+  Advisories filed ....... 31    28 GitHub Security Advisories (credit accepted) + 3 via MITRE
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
-  Proven with a PoC ...... 26    runnable · local-only · actually executed
+  Proven with a PoC ...... 27    runnable · local-only · actually executed
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
   Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
@@ -77,6 +77,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 28 | 🟠 **7.3** | `dssrf` · npm | SSRF-guard bypass via NFKC parser differential — `is_url_safe()` validates the NFKC-normalized URL (and rejects userinfo / internal hosts), but the app fetches the raw input; fullwidth `＃` / `？` / `／` fold the delimiters so the checker sees host `example.com` with empty userinfo while a normal HTTP client connects to `127.0.0.1` / RFC-1918 / `169.254.169.254` — defeating the library's own userinfo guard `CWE-918` · CVSS v4.0 8.8 High | [GHSA-xx33-w569-xg7j](https://github.com/HackingRepo/dssrf-js/security/advisories/GHSA-xx33-w569-xg7j) | 🔄 pending |
 | 29 | 🟠 **7.5** | `@blazity/next-image-proxy` · npm | Unauthenticated SSRF / allow-list bypass — the proxy follows 3xx redirects without re-validating the target (an allow-listed origin redirects to an internal host / `169.254.169.254` and the response is streamed back), and matches the allow-list with an unanchored regex `CWE-918` · CVSS v4.0 8.7 High | MITRE — CVE pending | 🔄 pending |
 | 30 | 🟠 **7.3** | `private-ip` · npm | SSRF-guard bypass via IPv4-mapped IPv6 — `ipv6_check` matches only the dotted `::ffff:127.0.0.1`, never the hex `::ffff:7f00:1` that WHATWG `new URL()` emits, so the guard approves loopback / cloud-metadata `CWE-918` · CVSS v4.0 8.8 High | MITRE — CVE requested | 🔄 pending |
+| 31 | 🟠 **8.3** | `es-toolkit` · npm | Prototype pollution in the `es-toolkit/compat` set-by-path family (`set`/`setWith`/`update`/`updateWith`) — the incomplete-safe-key guard rejects only `__proto__`, so a `constructor.prototype.<x>` path walks to `Object.prototype` and pollutes every object in the realm; re-introduces lodash CVE-2020-8203 in a package pulling ~32.3M downloads/week `CWE-1321` · CVSS v4.0 8.3 High | [GHSA-6fxx-7h6q-4x5f](https://github.com/toss/es-toolkit/security/advisories/GHSA-6fxx-7h6q-4x5f) | 🔄 pending |
 
 <sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability, cross-checked between two independent calculators. The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount, occasionally lower for blind / subsequent-scope SSRF.</sub>
 
