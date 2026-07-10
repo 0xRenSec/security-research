@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-31_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-27-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-33_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-29-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
@@ -34,9 +34,9 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  Advisories filed ....... 31    28 GitHub Security Advisories (credit accepted) + 3 via MITRE
+  Advisories filed ....... 33    28 GitHub Security Advisories (credit accepted) + 5 via MITRE
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
-  Proven with a PoC ...... 27    runnable · local-only · actually executed
+  Proven with a PoC ...... 29    runnable · local-only · actually executed
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
   Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
@@ -78,8 +78,10 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 29 | 🟠 **7.5** | `@blazity/next-image-proxy` · npm | Unauthenticated SSRF / allow-list bypass — the proxy follows 3xx redirects without re-validating the target (an allow-listed origin redirects to an internal host / `169.254.169.254` and the response is streamed back), and matches the allow-list with an unanchored regex `CWE-918` · CVSS v4.0 8.7 High | MITRE — CVE pending | 🔄 pending |
 | 30 | 🟠 **7.3** | `private-ip` · npm | SSRF-guard bypass via IPv4-mapped IPv6 — `ipv6_check` matches only the dotted `::ffff:127.0.0.1`, never the hex `::ffff:7f00:1` that WHATWG `new URL()` emits, so the guard approves loopback / cloud-metadata `CWE-918` · CVSS v4.0 8.8 High | MITRE — CVE requested | 🔄 pending |
 | 31 | 🟠 **8.3** | `es-toolkit` · npm | Prototype pollution in the `es-toolkit/compat` set-by-path family (`set`/`setWith`/`update`/`updateWith`) — the incomplete-safe-key guard rejects only `__proto__`, so a `constructor.prototype.<x>` path walks to `Object.prototype` and pollutes every object in the realm; re-introduces lodash CVE-2020-8203 in a package pulling ~32.3M downloads/week `CWE-1321` · CVSS v4.0 8.3 High | [GHSA-6fxx-7h6q-4x5f](https://github.com/toss/es-toolkit/security/advisories/GHSA-6fxx-7h6q-4x5f) | 🔄 pending |
+| 32 | 🟠 **8.2** | `faraday-restrict-ip-addresses` · RubyGems | SSRF egress-guard bypass — the deny-list is built only from IPv4 CIDRs while the resolver returns IPv6 and `IPAddr#include?` is always false across address families, so every IPv6 destination (`::1`, ULA `fc00::/7`, `::ffff:<v4>` mapped literals incl. cloud metadata) passes `deny_rfc1918`/`deny_rfc6890` `CWE-918` · CVSS v4.0 8.8 High | MITRE — CVE requested | 🔄 pending |
+| 33 | 🟠 **7.1** | `jsontokens` · npm | Signature-verification bypass — on the expanded/JWS-JSON token form `verifyExpanded` sets `verified=true` then only clears it inside a loop over the signature array, so an empty `signature:[]` vacuously passes and a fully attacker-controlled token is accepted (reachable when the consumer verifies the object form; the compact-string path is safe) `CWE-347` · CVSS v4.0 9.1 Critical (reachable path) | MITRE — CVE requested | 🔄 pending |
 
-<sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability, cross-checked between two independent calculators. The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount, occasionally lower for blind / subsequent-scope SSRF.</sub>
+<sub>Reported via GitHub Security Advisory (credit accepted), except rows 25 / 29 / 30 / 32 / 33 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability, cross-checked between two independent calculators. The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount, occasionally lower for blind / subsequent-scope SSRF.</sub>
 
 ---
 
