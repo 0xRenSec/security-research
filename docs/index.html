@@ -48,7 +48,7 @@
     font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
     font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
-  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
   a{color:var(--accent);text-decoration:none}
   a:focus-visible{outline:2px solid var(--ring);outline-offset:3px;border-radius:3px}
 
@@ -63,6 +63,15 @@
   .stats{display:flex;flex-wrap:wrap;gap:8px 26px;margin:28px 0 0;font-family:var(--mono);font-size:.82rem;color:var(--faint)}
   .stats b{color:var(--text);font-weight:650}
   .stats .n{color:var(--accent);font-weight:700}
+
+  @media(min-width:1000px){
+    header.mast .wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(250px,1fr);grid-template-areas:"eye eye" "title title" "dek facts";column-gap:56px}
+    header.mast .eyebrow{grid-area:eye}
+    header.mast h1{grid-area:title}
+    header.mast .dek{grid-area:dek;margin:0;align-self:start}
+    header.mast .stats{grid-area:facts;flex-direction:column;gap:14px;align-items:flex-start;margin:0;align-self:start;padding:22px 24px;border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+    main.wrap .lead-label,main.wrap .cards,main.wrap .more{max-width:700px}
+  }
 
   main{padding:38px 0 10px}
   .lead-label{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 18px}
