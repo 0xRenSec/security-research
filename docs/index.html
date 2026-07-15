@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0xRenSec — Security Research</title>
+<style>
+  :root{
+    --bg:#f0f5f1; --surface:#ffffff; --surface-2:#e9efe9; --border:#d5ddd6;
+    --text:#161a21; --muted:#565f70; --faint:#828a9b;
+    --accent:#1e7a49; --accent-2:#16613a; --accent-soft:rgba(30,122,73,.10);
+    --crit:#c22a24; --crit-soft:rgba(194,42,36,.10); --ok:#2f7d52;
+    --ring:rgba(30,122,73,.35);
+    --shadow:0 1px 2px rgba(20,24,33,.06),0 10px 34px rgba(20,24,33,.07);
+    --mono:ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#080f0b; --surface:#101711; --surface-2:#161f18; --border:#243026;
+      --text:#e7e9ef; --muted:#98a0b2; --faint:#6a7386;
+      --accent:#5ad18a; --accent-2:#86e5a9; --accent-soft:rgba(90,209,138,.12);
+      --crit:#ff5d54; --crit-soft:rgba(255,93,84,.13); --ok:#54c98a;
+      --ring:rgba(90,209,138,.40);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 44px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f0f5f1; --surface:#ffffff; --surface-2:#e9efe9; --border:#d5ddd6;
+    --text:#161a21; --muted:#565f70; --faint:#828a9b;
+    --accent:#1e7a49; --accent-2:#16613a; --accent-soft:rgba(30,122,73,.10);
+    --crit:#c22a24; --crit-soft:rgba(194,42,36,.10); --ok:#2f7d52;
+    --ring:rgba(30,122,73,.35);
+    --shadow:0 1px 2px rgba(20,24,33,.06),0 10px 34px rgba(20,24,33,.07);
+  }
+  :root[data-theme="dark"]{
+    --bg:#080f0b; --surface:#101711; --surface-2:#161f18; --border:#243026;
+    --text:#e7e9ef; --muted:#98a0b2; --faint:#6a7386;
+    --accent:#5ad18a; --accent-2:#86e5a9; --accent-soft:rgba(90,209,138,.12);
+    --crit:#ff5d54; --crit-soft:rgba(255,93,84,.13); --ok:#54c98a;
+    --ring:rgba(90,209,138,.40);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 44px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:focus-visible{outline:2px solid var(--ring);outline-offset:3px;border-radius:3px}
+
+  header.mast{padding:60px 0 34px;border-bottom:1px solid var(--border)}
+  .eyebrow{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+  .eyebrow .slash{color:var(--faint)}
+  h1{font-family:var(--mono);font-weight:650;font-size:clamp(2rem,5vw,3.1rem);line-height:1.06;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+  h1 .g{color:var(--accent)}
+  .dek{font-size:1.15rem;line-height:1.62;color:var(--muted);max-width:62ch;margin:0}
+  .stats{display:flex;flex-wrap:wrap;gap:8px 26px;margin:28px 0 0;font-family:var(--mono);font-size:.82rem;color:var(--faint)}
+  .stats b{color:var(--text);font-weight:650}
+  .stats .n{color:var(--accent);font-weight:700}
+
+  main{padding:38px 0 10px}
+  .lead-label{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 18px}
+
+  .cards{display:grid;gap:18px}
+  .cve-card{
+    display:block;border:1px solid var(--border);border-radius:16px;background:var(--surface);
+    box-shadow:var(--shadow);padding:24px 26px;color:inherit;
+    transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease
+  }
+  .cve-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 14px 44px rgba(0,0,0,.14)}
+  .cve-card .top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:14px}
+  .cid{font-family:var(--mono);font-weight:650;font-size:.92rem;color:var(--accent);letter-spacing:.02em}
+  .chip{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 11px;border-radius:999px;border:1px solid var(--crit);color:var(--crit);background:var(--crit-soft);display:inline-flex;gap:8px;align-items:center}
+  .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--crit)}
+  .cve-card h2{font-size:1.34rem;line-height:1.24;letter-spacing:-.01em;margin:0 0 10px;font-weight:650;color:var(--text)}
+  .cve-card h2 code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);border:1px solid var(--border);padding:.06em .36em;border-radius:6px;color:var(--accent-2)}
+  .cve-card p{margin:0 0 16px;color:var(--muted);max-width:66ch;font-size:1.02rem}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:.76rem;color:var(--faint);margin-bottom:16px}
+  .meta span b{color:var(--muted);font-weight:600}
+  .go{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+  .cve-card:hover .go .arw{transform:translateX(4px)}
+  .go .arw{transition:transform .16s ease}
+
+  .more{margin:26px 0 0;padding:20px 22px;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:.98rem}
+  .more a{font-weight:600;border-bottom:1px solid transparent}
+  .more a:hover{border-bottom-color:var(--accent)}
+
+  footer{padding:38px 0 60px;margin-top:34px;border-top:1px solid var(--border);color:var(--faint)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);font-size:.76rem}
+  footer b{color:var(--muted);font-weight:600}
+  footer .spacer{flex:1}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">0xRenSec <span class="slash">//</span> Security Research</p>
+    <h1>Bugs I've found, <span class="g">and proven</span></h1>
+    <p class="dek">Independent security research. I go after the auth and crypto flaws in libraries people actually ship — how they check login tokens, guard against SSRF, and unpack untrusted data. Each finding is pinned to the exact line of code and proven with a proof-of-concept I run against the real, published package. If it doesn't clear that bar, I drop it. One page per CVE below.</p>
+    <div class="stats">
+      <span><span class="n">1</span> CVE assigned</span>
+      <span><span class="n">33</span> advisories filed</span>
+      <span><b>Every</b> finding proven with a PoC</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead-label">Assigned CVEs</p>
+  <div class="cards">
+
+    <a class="cve-card" href="cve-2026-55954/">
+      <div class="top">
+        <span class="cid">CVE-2026-55954</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>ueberauth_apple</code> — Sign in with Apple, signed but never checked</h2>
+      <p>The library confirms Apple really signed the login token — and then trusts everything inside it without checking a single field: not who the token was issued for, not whether it's expired. So a borrowed or leaked Apple token logs an attacker straight in as someone else. I proved it end-to-end against the real package; fixed in 0.6.2.</p>
+      <div class="meta">
+        <span><b>Hex / Elixir</b></span>
+        <span>CWE-345 / 290 / 287</span>
+        <span>CVSS v3.1 7.4 · v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+  </div>
+
+  <p class="more">Coordinated disclosure is ongoing across dozens more advisories — CVE IDs are assigned when maintainers publish. See the full running list in the <a href="https://github.com/0xRenSec/security-research#-filed-advisories">advisory table</a>; each gets its own page here as its CVE lands.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>0xRenSec</b> · independent vulnerability research</span>
+    <span class="spacer"></span>
+    <span>Coordinated disclosure · loopback PoCs · synthetic secrets</span>
+  </div>
+</footer>
+
+</body>
+</html>
