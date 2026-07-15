@@ -55,6 +55,8 @@
   header.mast{padding:60px 0 34px;border-bottom:1px solid var(--border)}
   .eyebrow{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
   .eyebrow .slash{color:var(--faint)}
+  .eyebrow a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease}
+  .eyebrow a:hover{border-bottom-color:currentColor}
   h1{font-family:var(--mono);font-weight:650;font-size:clamp(2rem,5vw,3.1rem);line-height:1.06;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
   h1 .g{color:var(--accent)}
   .dek{font-size:1.15rem;line-height:1.62;color:var(--muted);max-width:62ch;margin:0}
@@ -92,6 +94,8 @@
   footer{padding:38px 0 60px;margin-top:34px;border-top:1px solid var(--border);color:var(--faint)}
   footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);font-size:.76rem}
   footer b{color:var(--muted);font-weight:600}
+  footer .wrap a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}
+  footer .wrap a:hover{border-bottom-color:currentColor}
   footer .spacer{flex:1}
 </style>
 </head>
@@ -99,13 +103,13 @@
 
 <header class="mast">
   <div class="wrap">
-    <p class="eyebrow">0xRenSec <span class="slash">//</span> Security Research</p>
-    <h1>Bugs I've found, <span class="g">and proven</span></h1>
-    <p class="dek">Independent security research. I go after the auth and crypto flaws in libraries people actually ship — how they check login tokens, guard against SSRF, and unpack untrusted data. Each finding is pinned to the exact line of code and proven with a proof-of-concept I run against the real, published package. If it doesn't clear that bar, I drop it. One page per CVE below.</p>
+    <p class="eyebrow"><a href="https://github.com/0xRenSec">0xRenSec</a> <span class="slash">//</span> Security Research</p>
+    <h1>Vulnerabilities in the <span class="g">libraries you ship</span></h1>
+    <p class="dek">I find and report them in the open-source packages real applications depend on — across authentication, cryptography, SSRF, and unsafe deserialization. Every finding is tied to the exact line of code and backed by a proof-of-concept I ran against the published package. If it doesn't reproduce, I don't file it. One page per CVE below.</p>
     <div class="stats">
       <span><span class="n">1</span> CVE assigned</span>
       <span><span class="n">33</span> advisories filed</span>
-      <span><b>Every</b> finding proven with a PoC</span>
+      <span><b>Every</b> finding backed by a PoC</span>
     </div>
   </div>
 </header>
@@ -136,7 +140,7 @@
 
 <footer>
   <div class="wrap">
-    <span><b>0xRenSec</b> · independent vulnerability research</span>
+    <span><a href="https://github.com/0xRenSec"><b>0xRenSec</b></a> · independent vulnerability research</span>
     <span class="spacer"></span>
     <span>Coordinated disclosure · loopback PoCs · synthetic secrets</span>
   </div>
