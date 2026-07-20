@@ -34,7 +34,8 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  Advisories filed ....... 37    32 GitHub Security Advisories (credit accepted) + 5 via MITRE
+  GitHub advisories ...... 32    Security Advisories · credit accepted
+  MITRE CVEs ............. 5     requested separately
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
   Proven with a PoC ...... 27    runnable · local-only · actually executed
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
