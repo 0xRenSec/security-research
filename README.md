@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-33_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/advisories-37_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/runnable_PoCs-27-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
@@ -34,7 +34,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  Advisories filed ....... 33    28 GitHub Security Advisories (credit accepted) + 5 via MITRE
+  Advisories filed ....... 37    32 GitHub Security Advisories (credit accepted) + 5 via MITRE
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
   Proven with a PoC ...... 27    runnable · local-only · actually executed
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
@@ -80,7 +80,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 31 | 🟠 **7.1** | `jsontokens` · npm | Signature-verification bypass — on the expanded/JWS-JSON token form `verifyExpanded` sets `verified=true` then only clears it inside a loop over the signature array, so an empty `signature:[]` vacuously passes and a fully attacker-controlled token is accepted (reachable when the consumer verifies the object form; the compact-string path is safe) `CWE-347` · CVSS v4.0 9.1 Critical (reachable path) | MITRE — CVE requested | 🔄 pending |
 | 32 | 🟠 **8.8** | `prefect` · pip | Result-store pickle deserialization RCE — a persisted result / background-task-parameter record is loaded with `cloudpickle.loads` and **the stored blob names its own serializer**, so an attacker record declaring `{"type":"pickle"}` overrides a deployment configured for JSON; a lower-trust writer of a shared result / task-param store gets code execution in the reader (a task worker, or a higher-trust flow reading a poisoned cache entry) `CWE-502` · CVSS v4.0 8.6 High | [GHSA-fx6g-c8gr-xhx9](https://github.com/PrefectHQ/prefect/security/advisories/GHSA-fx6g-c8gr-xhx9) | 🔄 pending |
 | 33 | 🟡 **6.5** | `dvc` · pip | Arbitrary file write outside the workspace via a malicious `.dvc` inline `outs[].files[].relpath` — `dvc pull`/`checkout`/`import` materialize an attacker-controlled directory file-list, joining each `relpath` onto the output dir with no containment check, so a `../../` entry escapes the workspace (write to an auto-run file → RCE) `CWE-22` · CVSS v4.0 6.9 Medium | [GHSA-278j-wfpv-rp8f](https://github.com/treeverse/dvc/security/advisories/GHSA-278j-wfpv-rp8f) | 🔄 pending |
-| 34 | 🟡 **6.9** | `shiny` (py-shiny) · pip | py-shiny ≤ 1.6.3: unauth bookmark path traversal `CWE-22` · CVSS v4.0 6.9 Medium | [GHSA-47c3-hpmg-7j6p](https://github.com/posit-dev/py-shiny/security/advisories/GHSA-47c3-hpmg-7j6p) | 🔄 pending |
+| 34 | 🟡 **6.9** | `shiny` (py-shiny) · pip | py-shiny ≤ 1.6.3: unauth bookmark path traversal `CWE-22` · CVSS v4.0 6.9 Moderate | [GHSA-47c3-hpmg-7j6p](https://github.com/posit-dev/py-shiny/security/advisories/GHSA-47c3-hpmg-7j6p) | 🔄 pending |
 | 35 | 🟠 **7.1** | `replicate` · pip | replicate ≤ 1.0.7: API token leak to untrusted hosts `CWE-522` · CVSS v4.0 7.1 High | [GHSA-7v25-mxqf-p9c4](https://github.com/replicate/replicate-python/security/advisories/GHSA-7v25-mxqf-p9c4) | 🔄 pending |
 | 36 | 🟠 **8.5** | `@agent-infra/mcp-server-filesystem` · npm (MCP) | @agent-infra/mcp-server-filesystem ≤ 1.2.29: jail escape `CWE-22` · CVSS v4.0 8.5 High | [GHSA-c5xr-72g8-4gh8](https://github.com/bytedance/UI-TARS-desktop/security/advisories/GHSA-c5xr-72g8-4gh8) | 🔄 pending |
 | 37 | 🟠 **8.7** | `modelscope` · pip | modelscope ≤ 1.38.1: video-pipeline command injection (RCE) `CWE-78` · CVSS v4.0 8.7 High | [GHSA-c69m-g9x8-gc8c](https://github.com/modelscope/modelscope/security/advisories/GHSA-c69m-g9x8-gc8c) | 🔄 pending |
