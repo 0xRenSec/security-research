@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-37_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-27-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-38_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-28-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
@@ -34,10 +34,10 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  GitHub advisories ...... 32    Security Advisories · credit accepted
+  GitHub advisories ...... 33    Security Advisories · credit accepted
   MITRE CVEs ............. 5     requested separately
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
-  Proven with a PoC ...... 27    runnable · local-only · actually executed
+  Proven with a PoC ...... 28    runnable · local-only · actually executed
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
   Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
@@ -85,6 +85,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 35 | 🟠 **7.1** | `replicate` · pip | replicate ≤ 1.0.7: API token leak to untrusted hosts `CWE-522` · CVSS v4.0 7.1 High | [GHSA-7v25-mxqf-p9c4](https://github.com/replicate/replicate-python/security/advisories/GHSA-7v25-mxqf-p9c4) | 🔄 pending |
 | 36 | 🟠 **8.5** | `@agent-infra/mcp-server-filesystem` · npm (MCP) | @agent-infra/mcp-server-filesystem ≤ 1.2.29: jail escape `CWE-22` · CVSS v4.0 8.5 High | [GHSA-c5xr-72g8-4gh8](https://github.com/bytedance/UI-TARS-desktop/security/advisories/GHSA-c5xr-72g8-4gh8) | 🔄 pending |
 | 37 | 🟠 **8.7** | `modelscope` · pip | modelscope ≤ 1.38.1: video-pipeline command injection (RCE) `CWE-78` · CVSS v4.0 8.7 High | [GHSA-c69m-g9x8-gc8c](https://github.com/modelscope/modelscope/security/advisories/GHSA-c69m-g9x8-gc8c) | 🔄 pending |
+| 38 | 🟠 **7.5** | `go-square` · Go (Celestia) | Reachable slice-out-of-range panic (DoS) in the exported `Sequence.RawData()` — `data[:sequenceLen]` uses an attacker-controlled header length with no bounds check, reachable through the public `ParseShares` API (a padding-namespace short-circuit in `validSequenceLen` skips the length check). Availability-only; honestly scoped as a downstream / public-API defect — core celestia-app/celestia-node use `ParseBlobs`/`ParseTxs` and don't reach it `CWE-129` · CVSS v4.0 8.7 High | [GHSA-fg3q-p289-h9rr](https://github.com/celestiaorg/go-square/security/advisories/GHSA-fg3q-p289-h9rr) | 🔄 pending |
 
 <sub>Reported via GitHub Security Advisory (credit accepted), except rows 23 / 27 / 28 / 30 / 31 (MITRE-routed, no PVR). CVE IDs land on publication. The headline severity is the as-filed CVSS v3.1 Base; the `CVSS v4.0 …` note is the FIRST.org v4.0 Base recompute of the same vulnerability, cross-checked between two independent calculators. The v4.0 band can differ from the v3.1 headline — usually higher, since 4.0 drops the v3.1 Scope discount, occasionally lower for blind / subsequent-scope SSRF.</sub>
 
