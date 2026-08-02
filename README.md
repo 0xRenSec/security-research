@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
   <img src="https://img.shields.io/badge/advisories-57_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-54-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/runnable_PoCs-55-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
@@ -37,7 +37,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
   GitHub advisories ...... 52    Security Advisories · credit accepted
   MITRE CVEs ............. 5     requested separately
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
-  Proven with a PoC ...... 54    runnable · local-only · of 57 filed (3 unverified)
+  Proven with a PoC ...... 55    runnable · local-only · of 57 filed (2 unverified)
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
   Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
