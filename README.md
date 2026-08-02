@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-38_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/advisories-57_filed-1f6feb?style=for-the-badge&logo=github">
   <img src="https://img.shields.io/badge/runnable_PoCs-28-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
@@ -34,7 +34,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  GitHub advisories ...... 33    Security Advisories · credit accepted
+  GitHub advisories ...... 52    Security Advisories · credit accepted
   MITRE CVEs ............. 5     requested separately
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
   Proven with a PoC ...... 28    runnable · local-only · actually executed
@@ -87,7 +87,26 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 37 | 🟠 **8.7** | `modelscope` · pip | modelscope ≤ 1.38.1: video-pipeline command injection (RCE) `CWE-78` | [GHSA-c69m-g9x8-gc8c](https://github.com/modelscope/modelscope/security/advisories/GHSA-c69m-g9x8-gc8c) | 🔄 pending |
 | 38 | 🟠 **8.7** | `go-square` · Go (Celestia) | Reachable panic / denial-of-service via an exported parsing API — availability-only, downstream / public-API scope (details embargoed until fixed) `CWE-129` | [GHSA-fg3q-p289-h9rr](https://github.com/celestiaorg/go-square/security/advisories/GHSA-fg3q-p289-h9rr) | 🔄 pending |
 
-<sub>Reported via GitHub Security Advisory (credit accepted), except rows 23 / 27 / 28 / 30 / 31 (MITRE-routed, no PVR). CVE IDs land on publication. The Sev column is the FIRST.org **CVSS v4.0 Base** score, cross-checked between two independent calculators.</sub>
+| 39 | 🔴 **critical** | `@cyanheads/git-mcp-server` · npm (MCP) | Argument injection → arbitrary file write — MCP tool args reach a git invocation unescaped `CWE-88` | [GHSA-p9rp-mqwc-4chg](https://github.com/cyanheads/git-mcp-server/security/advisories/GHSA-p9rp-mqwc-4chg) | 🔄 pending |
+| 40 | 🟠 **high** | `sglang` · pip | Cross-encoder activation loader RCE — the sole guard is an `assert`, stripped under `python -O`; variant of vLLM CVE-2026-41523, confirmed on the shipped 0.5.16 wheel `CWE-94` | [GHSA-pfxh-v2c2-9rx3](https://github.com/sgl-project/sglang/security/advisories/GHSA-pfxh-v2c2-9rx3) | 🔄 pending |
+| 41 | 🟠 **high** | `dify` · Docker/self-hosted | `POST /console/api/test/retrieval` has no authentication — unauthenticated callers drive AWS Bedrock `Retrieve` with the server's credentials and an attacker-chosen knowledge base `CWE-306` | [GHSA-8qqf-22fx-3h6x](https://github.com/langgenius/dify/security/advisories/GHSA-8qqf-22fx-3h6x) | 🔄 pending |
+| 42 | 🟠 **high** | `ncnn` (Tencent) · C++ | Heap out-of-bounds **write** in `Mat::create()` via allocation-size underflow on a negative dimension `CWE-787` | [GHSA-hr7q-gf7r-jw2f](https://github.com/Tencent/ncnn/security/advisories/GHSA-hr7q-gf7r-jw2f) | 🔄 pending |
+| 43 | 🟠 **high** | `ncnn` (Tencent) · C++ | Out-of-bounds write — blob indices read from the model file are used as vector subscripts with no bounds or sign check `CWE-787` | [GHSA-hh92-7m77-wx77](https://github.com/Tencent/ncnn/security/advisories/GHSA-hh92-7m77-wx77) | 🔄 pending |
+| 44 | 🟠 **high** | `picklescan` · pip | Scanner evasion — a code-executing pickle scans CLEAN, defeating the tool's entire purpose `CWE-693` | [GHSA-67cg-2xqg-39qm](https://github.com/mmaitre314/picklescan/security/advisories/GHSA-67cg-2xqg-39qm) | 🔄 pending |
+| 45 | 🟠 **high** | `lightgbm` · pip | Out-of-bounds read + adjacent-heap disclosure — the `tree_sizes` branch walks the model text unbounded while the sibling branch is bounded `CWE-125` | [GHSA-g64f-8q9j-5g3g](https://github.com/microsoft/LightGBM/security/advisories/GHSA-g64f-8q9j-5g3g) | 🔄 pending |
+| 46 | 🟠 **high** | `mlrun` · pip | Artifact metadata dictates the deserializer — the artifact stamps `allow_pickle=True` back into a loader whose own docstring says it defaults False "for security reasons" `CWE-502` | [GHSA-8fw9-wp5x-7294](https://github.com/mlrun/mlrun/security/advisories/GHSA-8fw9-wp5x-7294) | 🔄 pending |
+| 47 | 🟠 **high** | `camel-ai` · pip | No path containment on an LLM-callable file write, while a sibling toolkit does `commonpath` containment by default `CWE-22` | [GHSA-79xf-46xq-6v4x](https://github.com/camel-ai/camel/security/advisories/GHSA-79xf-46xq-6v4x) | 🔄 pending |
+| 48 | 🟡 **medium** | `catboost` · pip | `TreeSplits` values used as unchecked subscripts; the adjacent `CB_ENSURE` validates the dereferenced result rather than the index `CWE-125` | [GHSA-988f-fm5v-rwvv](https://github.com/catboost/catboost/security/advisories/GHSA-988f-fm5v-rwvv) | 🔄 pending |
+| 49 | 🟡 **medium** | `ncnn` (Tencent) · C++ | 16 crash sites reachable from `load_model()` on a crafted model `CWE-20` | [GHSA-2q52-m5cm-grpm](https://github.com/Tencent/ncnn/security/advisories/GHSA-2q52-m5cm-grpm) | 🔄 pending |
+| 50 | 🟡 **medium** | `mergekit` · pip | Bare `torch.load` on an untrusted checkpoint, beside two already-hardened siblings `CWE-502` | [GHSA-3q3r-2gp5-6gxw](https://github.com/arcee-ai/mergekit/security/advisories/GHSA-3q3r-2gp5-6gxw) | 🔄 pending |
+| 51 | 🟡 **medium** | `kserve` · pip/K8s | Storage-initializer path traversal — remote object keys are concatenated onto the download dir with no containment; confirmed inside the shipped `storage-initializer` container `CWE-22` | [GHSA-f8m6-j2c5-mpg9](https://github.com/kserve/kserve/security/advisories/GHSA-f8m6-j2c5-mpg9) | 🔄 pending |
+| 52 | 🟡 **medium** | `mediapipe` · pip | Heap out-of-bounds read in the `.task`/`.tflite` zip reader — the declared `uncompressed_size` is never bounded against the buffer `CWE-125` | [GHSA-cxq2-4ww8-66gg](https://github.com/google-ai-edge/mediapipe/security/advisories/GHSA-cxq2-4ww8-66gg) | 🔄 pending |
+| 53 | 🟡 **medium** | `tflite-support` · pip | Same root cause as the MediaPipe reader and its **origin**; five SIGSEGVs reproduced on the published 0.4.4 wheel via the C++ Task Library `CWE-125` | [GHSA-36rc-j835-7f2p](https://github.com/tensorflow/tflite-support/security/advisories/GHSA-36rc-j835-7f2p) | 🔄 pending |
+| 54 | 🟡 **medium** | LiteRT-LM · C++ (Google) | Same root cause again — the rewrite **moved** the pointer arithmetic into `GetFile()` rather than adding a bound `CWE-125` | [GHSA-m5m7-3892-4qpc](https://github.com/google-ai-edge/LiteRT-LM/security/advisories/GHSA-m5m7-3892-4qpc) | 🔄 pending |
+| 55 | 🟢 **low** | `pydicom` · pip | `FileSet.write()` hardened the **source** of every file operation and left the destination unchecked → a file moves outside the File-set root via a pre-existing junction `CWE-22` | [GHSA-2rf8-5q2v-f6qg](https://github.com/pydicom/pydicom/security/advisories/GHSA-2rf8-5q2v-f6qg) | 🔄 pending |
+| 56 | 🟢 **low** | `skops` · pip | `RandomGeneratorNode` constructs a class named by the file — the name is a plain value, so it never reaches `get_untrusted_types()` and the audit reports nothing `CWE-502` | [GHSA-rp88-xr4j-hf3x](https://github.com/skops-dev/skops/security/advisories/GHSA-rp88-xr4j-hf3x) | 🔄 pending |
+| 57 | 🟢 **low** | `milvus` · Go | Unauthenticated `PUT /log/level` on management port 9091 — the CVE-2026-26190 remediation gated `/expr` and left the setter registered beside it open `CWE-306` | [GHSA-74vw-qgrc-35v7](https://github.com/milvus-io/milvus/security/advisories/GHSA-74vw-qgrc-35v7) | 🔄 pending |
+<sub>Reported via GitHub Security Advisory (credit accepted), except rows 23 / 27 / 28 / 30 / 31 (MITRE-routed, no PVR). CVE IDs land on publication. The Sev column is the FIRST.org **CVSS v4.0 Base** score, cross-checked between two independent calculators, for rows 1–38. Rows 39+ carry the **severity as filed on the advisory** and are pending a cross-checked v4.0 score.</sub>
 
 ---
 
