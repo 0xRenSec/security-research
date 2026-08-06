@@ -116,8 +116,8 @@
     <h1>Vulnerabilities in the <span class="g">libraries you ship</span></h1>
     <p class="dek">I identify and report vulnerabilities in widely used open-source packages that real-world applications depend on, with a focus on authentication, cryptography, SSRF, unsafe deserialization, and related classes of bugs. Every finding pinpoints the exact vulnerable line of code and includes a reproducible proof-of-concept against the published package — I only report issues I can reproduce. Each finding is documented on a single page, whether it's assigned a CVE or published as an advisory.</p>
     <div class="stats">
-      <span><span class="n">1</span> CVE assigned</span>
-      <span><span class="n">33</span> advisories filed</span>
+      <span><span class="n">2</span> CVEs assigned</span>
+      <span><span class="n">57</span> advisories filed</span>
       <span><b>Every</b> finding backed by a PoC</span>
     </div>
   </div>
@@ -126,6 +126,21 @@
 <main class="wrap">
   <p class="lead-label">Assigned CVEs</p>
   <div class="cards">
+
+    <a class="cve-card" href="cve-2026-63656/">
+      <div class="top">
+        <span class="cid">CVE-2026-63656</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.3</span>
+      </div>
+      <h2><code>flyimg</code> — every value escaped but one</h2>
+      <p>flyimg builds an ImageMagick command line from URL options and runs it through a shell. Every value on that line is escaped except <code>webp-method</code>, which comes straight from the URL — so one unauthenticated GET request runs arbitrary OS commands on the image server. I proved it against the real command-builder and proc_open path; fixed in 1.12.3.</p>
+      <div class="meta">
+        <span><b>Composer / PHP</b></span>
+        <span>CWE-78 / 77</span>
+        <span>CVSS v4.0 9.3</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
 
     <a class="cve-card" href="cve-2026-55954/">
       <div class="top">
