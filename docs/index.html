@@ -74,7 +74,9 @@
   }
 
   main{padding:38px 0 10px}
-  .lead-label{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 18px}
+  .lead-label{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 18px;display:flex;align-items:baseline;gap:10px}
+  .lead-label .n{color:var(--accent);font-weight:700;letter-spacing:.08em}
+  .cards + .lead-label{margin-top:46px}
 
   .cards{display:grid;gap:18px}
   .cve-card{
@@ -83,6 +85,7 @@
     transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease
   }
   .cve-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 14px 44px rgba(0,0,0,.14)}
+  .cve-card:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
   .cve-card .top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:14px}
   .cid{font-family:var(--mono);font-weight:650;font-size:.92rem;color:var(--accent);letter-spacing:.02em}
   .chip{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 11px;border-radius:999px;border:1px solid var(--crit);color:var(--crit);background:var(--crit-soft);display:inline-flex;gap:8px;align-items:center}
@@ -90,13 +93,14 @@
   .cve-card h2{font-size:1.34rem;line-height:1.24;letter-spacing:-.01em;margin:0 0 10px;font-weight:650;color:var(--text)}
   .cve-card h2 code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);border:1px solid var(--border);padding:.06em .36em;border-radius:6px;color:var(--accent-2)}
   .cve-card p{margin:0 0 16px;color:var(--muted);max-width:66ch;font-size:1.02rem}
+  .cve-card p code{font-family:var(--mono);font-size:.84em;background:var(--surface-2);border:1px solid var(--border);padding:.04em .32em;border-radius:5px;color:var(--accent-2)}
   .meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:.76rem;color:var(--faint);margin-bottom:16px}
   .meta span b{color:var(--muted);font-weight:600}
   .go{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
   .cve-card:hover .go .arw{transform:translateX(4px)}
   .go .arw{transition:transform .16s ease}
 
-  .more{margin:26px 0 0;padding:20px 22px;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:.98rem}
+  .more{margin:46px 0 0;padding:20px 22px;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:.98rem}
   .more a{font-weight:600;border-bottom:1px solid transparent}
   .more a:hover{border-bottom-color:var(--accent)}
 
@@ -106,6 +110,12 @@
   footer .wrap a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}
   footer .wrap a:hover{border-bottom-color:currentColor}
   footer .spacer{flex:1}
+
+  @media (prefers-reduced-motion:reduce){
+    .cve-card{transition:none}
+    .cve-card:hover{transform:none}
+    .go .arw{transition:none}
+  }
 </style>
 </head>
 <body>
@@ -116,7 +126,7 @@
     <h1>Vulnerabilities in the <span class="g">libraries you ship</span></h1>
     <p class="dek">I identify and report vulnerabilities in widely used open-source packages that real-world applications depend on, with a focus on authentication, cryptography, SSRF, unsafe deserialization, and related classes of bugs. Every finding pinpoints the exact vulnerable line of code and includes a reproducible proof-of-concept against the published package — I only report issues I can reproduce. Each finding is documented on a single page, whether it's assigned a CVE or published as an advisory.</p>
     <div class="stats">
-      <span><span class="n">2</span> CVEs assigned</span>
+      <span><span class="n">12</span> CVEs assigned</span>
       <span><span class="n">57</span> advisories filed</span>
       <span><b>Every</b> finding backed by a PoC</span>
     </div>
@@ -124,7 +134,188 @@
 </header>
 
 <main class="wrap">
-  <p class="lead-label">Assigned CVEs</p>
+
+  <p class="lead-label">JWT / JOSE authentication bypasses <span class="n">7</span></p>
+  <div class="cards">
+
+    <a class="cve-card" href="cve-2026-55954/">
+      <div class="top">
+        <span class="cid">CVE-2026-55954</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>ueberauth_apple</code> — Sign in with Apple, signed but never checked</h2>
+      <p>The library confirms Apple really signed the login token — and then trusts everything inside it without checking a single field: not who the token was issued for, not whether it's expired. So a borrowed or leaked Apple token logs an attacker straight in as someone else. I proved it end-to-end against the real package; fixed in 0.6.2.</p>
+      <div class="meta">
+        <span><b>Hex / Elixir</b></span>
+        <span>CWE-345 / 290 / 287</span>
+        <span>CVSS v3.1 7.4 · v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78922/">
+      <div class="top">
+        <span class="cid">CVE-2026-78922</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>jsontokens</code> — all signatures valid, when there are none</h2>
+      <p>When it verifies the expanded token form, jsontokens loops over the signature array requiring every signature to check out — but never that one exists. Hand it a token carrying <code>signature: []</code> and no signature at all, and <code>verify()</code> returns true. It bites where an app verifies the object form; I proved it against the real 4.0.1 with three negative controls.</p>
+      <div class="meta">
+        <span><b>npm</b></span>
+        <span>CWE-347 / 345</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78926/">
+      <div class="top">
+        <span class="cid">CVE-2026-78926</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>reallysimplejwt</code> — strict to issue, wide open to verify</h2>
+      <p>The library refuses to issue a token unless the secret is 12+ characters with mixed classes, then accepts a zero-length secret when it verifies one. Anyone who knows the secret is empty forges an HS256 token with any claims — the build-side policy is simply never applied on the verify path. Proven against the real 5.0.0.</p>
+      <div class="meta">
+        <span><b>Packagist / PHP</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78928/">
+      <div class="top">
+        <span class="cid">CVE-2026-78928</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>joken</code> — an empty string is still a binary</h2>
+      <p>joken guards the HMAC secret with only an <code>is_binary</code> check, so <code>""</code> flows through to erlang-jose and the empty-key HMAC is accepted. Know the secret is empty and you forge a token with any claims. Verified against joken 2.6.2 with jose 1.11.12.</p>
+      <div class="meta">
+        <span><b>Hex / Elixir</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78929/">
+      <div class="top">
+        <span class="cid">CVE-2026-78929</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>jose-jwt</code> (.NET) — a zero-length key is a public key</h2>
+      <p>jose-jwt never rejects a zero-length HMAC key, and an empty-key signature needs no secret to compute. When an app's HS* key resolves to an empty byte array, <code>Jose.JWT.Decode</code> accepts a forged token with any claims. Proven against 5.3.0 on .NET 8, with a null-key boundary control.</p>
+      <div class="meta">
+        <span><b>NuGet / .NET</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78931/">
+      <div class="top">
+        <span class="cid">CVE-2026-78931</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>nowakowskir/php-jwt</code> — no key at all still verifies</h2>
+      <p>The verify path recomputes the HMAC with the caller's key and never rejects a zero-length one, so <code>JWT::validate($t, '', 'HS256')</code> accepts an empty-key forgery. The verify algorithm is caller-forced — good anti-confusion design — but that does nothing against an empty key. Proven against 2.1.1.</p>
+      <div class="meta">
+        <span><b>Packagist / PHP</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78932/">
+      <div class="top">
+        <span class="cid">CVE-2026-78932</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
+      </div>
+      <h2><code>kataras/jwt</code> — the loader hands back an empty key</h2>
+      <p>kataras/jwt accepts a zero-length HMAC secret, and its own <code>MustLoadHMAC("")</code> returns an empty key with no error — so an unset <code>JWT_SECRET</code> quietly becomes a forgeable key. I proved both reachability paths against v0.1.17.</p>
+      <div class="meta">
+        <span><b>Go</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.1</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+  </div>
+
+  <p class="lead-label">DID / Verifiable-Credential identity <span class="n">2</span></p>
+  <div class="cards">
+
+    <a class="cve-card" href="cve-2026-78924/">
+      <div class="top">
+        <span class="cid">CVE-2026-78924</span>
+        <span class="chip"><span class="dot"></span>Critical · 9.3</span>
+      </div>
+      <h2><code>@sphereon/did-auth-siop</code> — a verdict object that's always truthy</h2>
+      <p>The OpenID4VP verifier delegates each presentation's signature check to a callback returning <code>{ verified }</code>, then tests the truthiness of the object instead of its <code>.verified</code> field. A <code>{ verified: false }</code> verdict counts as success, so a credential forged under an attacker key is accepted. Proven against 0.21.1.</p>
+      <div class="meta">
+        <span><b>npm</b></span>
+        <span>CWE-347</span>
+        <span>CVSS v4.0 9.3</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78930/">
+      <div class="top">
+        <span class="cid">CVE-2026-78930</span>
+        <span class="chip"><span class="dot"></span>High · 8.7</span>
+      </div>
+      <h2><code>did-jwt-vc</code> — the signer says attacker, the credential says victim</h2>
+      <p>did-jwt-vc verifies the JWT signature against <code>iss</code> (correct), then lets the untrusted payload <code>issuer</code> override it during normalization, with no <code>iss == issuer</code> check. Sign with your own key while claiming a victim issuer, and any relying party that trusts the normalized issuer is deceived. Proven against 4.0.16.</p>
+      <div class="meta">
+        <span><b>npm</b></span>
+        <span>CWE-345 / 290 / 347</span>
+        <span>CVSS v4.0 8.7</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+  </div>
+
+  <p class="lead-label">Server-side request forgery <span class="n">2</span></p>
+  <div class="cards">
+
+    <a class="cve-card" href="cve-2026-78921/">
+      <div class="top">
+        <span class="cid">CVE-2026-78921</span>
+        <span class="chip"><span class="dot"></span>High · 8.8</span>
+      </div>
+      <h2><code>faraday-restrict-ip-addresses</code> — the denylist only speaks IPv4</h2>
+      <p>This SSRF egress guard builds its denylist entirely from IPv4 CIDRs, and Ruby's <code>IPAddr#include?</code> never matches across address families — so every IPv6 destination walks straight past it. I proved it live against the real gem, exfiltrating a loopback-only secret.</p>
+      <div class="meta">
+        <span><b>RubyGems</b></span>
+        <span>CWE-918 / 184 / 697</span>
+        <span>CVSS v4.0 8.8</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+    <a class="cve-card" href="cve-2026-78933/">
+      <div class="top">
+        <span class="cid">CVE-2026-78933</span>
+        <span class="chip"><span class="dot"></span>High · 8.2</span>
+      </div>
+      <h2><code>httpx</code> — two parsers, two hosts, one request</h2>
+      <p>httpx reads the host of <code>http://api.trusted.com\@127.0.0.1/</code> as <code>127.0.0.1</code> while browser-aligned parsers see <code>api.trusted.com</code>. A guard that validates with one parser and lets httpx fetch reaches the attacker's internal host. I proved delivery to a distinct loopback victim on 0.28.1.</p>
+      <div class="meta">
+        <span><b>PyPI</b></span>
+        <span>CWE-436 / 918</span>
+        <span>CVSS v4.0 8.2</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+  </div>
+
+  <p class="lead-label">Command injection <span class="n">1</span></p>
   <div class="cards">
 
     <a class="cve-card" href="cve-2026-63656/">
@@ -142,24 +333,9 @@
       <span class="go">Read the report <span class="arw">→</span></span>
     </a>
 
-    <a class="cve-card" href="cve-2026-55954/">
-      <div class="top">
-        <span class="cid">CVE-2026-55954</span>
-        <span class="chip"><span class="dot"></span>Critical · 9.1</span>
-      </div>
-      <h2><code>ueberauth_apple</code> — Sign in with Apple, signed but never checked</h2>
-      <p>The library confirms Apple really signed the login token — and then trusts everything inside it without checking a single field: not who the token was issued for, not whether it's expired. So a borrowed or leaked Apple token logs an attacker straight in as someone else. I proved it end-to-end against the real package; fixed in 0.6.2.</p>
-      <div class="meta">
-        <span><b>Hex / Elixir</b></span>
-        <span>CWE-345 / 290 / 287</span>
-        <span>CVSS v3.1 7.4 · v4.0 9.1</span>
-      </div>
-      <span class="go">Read the report <span class="arw">→</span></span>
-    </a>
-
   </div>
 
-  <p class="more">Coordinated disclosure is ongoing across dozens more advisories — CVE IDs are assigned when maintainers publish. See the full running list in the <a href="https://github.com/0xRenSec/security-research#-filed-advisories">advisory table</a>; each gets its own page here as its CVE lands.</p>
+  <p class="more">Coordinated disclosure is ongoing across dozens more advisories — CVE IDs are assigned when maintainers publish or MITRE processes the request. See the full running list in the <a href="https://github.com/0xRenSec/security-research#-filed-advisories">advisory table</a>; each gets its own page here as its CVE lands.</p>
 </main>
 
 <footer>
