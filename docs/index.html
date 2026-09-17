@@ -126,8 +126,8 @@
     <h1>Vulnerabilities in the <span class="g">libraries you ship</span></h1>
     <p class="dek">I identify and report vulnerabilities in widely used open-source packages that real-world applications depend on, with a focus on authentication, cryptography, SSRF, unsafe deserialization, and related classes of bugs. Every finding pinpoints the exact vulnerable line of code and includes a reproducible proof-of-concept against the published package — I only report issues I can reproduce. Each finding is documented on a single page, whether it's assigned a CVE or published as an advisory.</p>
     <div class="stats">
-      <span><span class="n">12</span> CVEs assigned</span>
-      <span><span class="n">57</span> advisories filed</span>
+      <span><span class="n">13</span> CVEs assigned</span>
+      <span><span class="n">58</span> advisories filed</span>
       <span><b>Every</b> finding backed by a PoC</span>
     </div>
   </div>
@@ -329,6 +329,26 @@
         <span><b>Composer / PHP</b></span>
         <span>CWE-78 / 77</span>
         <span>CVSS v4.0 9.3</span>
+      </div>
+      <span class="go">Read the report <span class="arw">→</span></span>
+    </a>
+
+  </div>
+
+  <p class="lead-label">Path / route-guard bypass <span class="n">1</span></p>
+  <div class="cards">
+
+    <a class="cve-card" href="cve-2026-90982/">
+      <div class="top">
+        <span class="cid">CVE-2026-90982</span>
+        <span class="chip"><span class="dot"></span>Medium · 5.3</span>
+      </div>
+      <h2><code>@fastify/static</code> — the guard sees /deep, the disk sees /DEEP</h2>
+      <p>10.1.3 closed the <code>..</code> / slash / backslash aliases and left letter-case alone. On Windows and default macOS, <code>GET /DEEP/secret.txt</code> skips a case-sensitive <code>/deep/*</code> hook and still opens the same file. Incomplete fix of CVE-2026-18427; Fastify shipped 10.1.4 the day the advisory went public.</p>
+      <div class="meta">
+        <span><b>npm</b></span>
+        <span>CWE-178 / 284</span>
+        <span>CVSS v3.1 5.3</span>
       </div>
       <span class="go">Read the report <span class="arw">→</span></span>
     </a>

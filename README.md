@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/researcher-0xRenSec-0b0b0b?style=for-the-badge&logo=hackthebox&logoColor=9fef00">
-  <img src="https://img.shields.io/badge/advisories-57_filed-1f6feb?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/runnable_PoCs-55-2ea043?style=for-the-badge">
+  <img src="https://img.shields.io/badge/advisories-58_filed-1f6feb?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/runnable_PoCs-56-2ea043?style=for-the-badge">
   <img src="https://img.shields.io/badge/peak-9.8_CRITICAL-c5221f?style=for-the-badge">
   <img src="https://img.shields.io/badge/ecosystems-11-8957e5?style=for-the-badge">
   <img src="https://img.shields.io/badge/disclosure-coordinated-fb8500?style=for-the-badge">
@@ -34,10 +34,10 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 ### ⚡ By the numbers
 
 ```text
-  GitHub advisories ...... 52    Security Advisories · credit accepted
+  GitHub advisories ...... 53    Security Advisories · credit accepted
   MITRE CVEs ............. 5     requested separately
   Critical severity ...... 7     peak 9.8 — unauthenticated RCE
-  Proven with a PoC ...... 55    runnable · local-only · 2 of 57 unverified
+  Proven with a PoC ...... 56    runnable · local-only · 2 of 58 unverified
   Confirmed pipeline ..... 50+   novel findings across 11 ecosystems
   Malware caught ......... 8     packages across 4 supply-chain campaigns
 ```
@@ -105,6 +105,7 @@ stay embargoed until there's a fix or a CVE. The Status column below tracks that
 | 55 | 🟢 **2.3** | `pydicom` · pip | `FileSet.write()` hardened the **source** of every file operation and left the destination unchecked → a file moves outside the File-set root via a pre-existing junction `CWE-22` | [GHSA-2rf8-5q2v-f6qg](https://github.com/pydicom/pydicom/security/advisories/GHSA-2rf8-5q2v-f6qg) | 🔄 pending |
 | 56 | 🟢 **2.3** | `skops` · pip | `RandomGeneratorNode` constructs a class named by the file — the name is a plain value, so it never reaches `get_untrusted_types()` and the audit reports nothing `CWE-502` | [GHSA-rp88-xr4j-hf3x](https://github.com/skops-dev/skops/security/advisories/GHSA-rp88-xr4j-hf3x) | 🔄 pending |
 | 57 | 🟡 **5.3** | `milvus` · Go | Unauthenticated write to a management-port endpoint left open by an earlier remediation that gated its sibling — details embargoed until fixed `CWE-306` | [GHSA-74vw-qgrc-35v7](https://github.com/milvus-io/milvus/security/advisories/GHSA-74vw-qgrc-35v7) | 🔄 pending |
+| 58 | 🟡 **5.3** | `@fastify/static` · npm | Route-guard / `allowedPath` bypass via path case-fold on a case-insensitive FS (Windows / macOS) — incomplete-fix residual of CVE-2026-18427 `CWE-178` | [GHSA-r799-r9gc-m956](https://github.com/fastify/fastify-static/security/advisories/GHSA-r799-r9gc-m956) | ✅ [CVE-2026-90982](https://github.com/fastify/fastify-static/security/advisories/GHSA-r799-r9gc-m956) |
 
 <sub>Reported via GitHub Security Advisory (credit accepted), except rows 23 / 27 / 28 / 30 / 31 (MITRE-routed, no PVR). CVE IDs land on publication. The Sev column is the FIRST.org **CVSS v4.0 Base** score — cross-checked between two independent calculators for rows 1–38, single-source for rows 39+.</sub>
 
