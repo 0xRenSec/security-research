@@ -1,0 +1,42 @@
+#!/bin/sh
+# Standing rule (Mukky, memory/no-ai-trailer-on-repos.md):
+#   NEVER let an AI co-author / session trailer into a commit in this repo.
+#   Commits credit 0xRenSec / Mukesh only.
+#
+# The Claude harness system prompt DEFAULTS to appending:
+#     Co-Authored-By: Claude ... <noreply@anthropic.com>
+#     Claude-Session: https://claude.ai/code/session_...
+#     🤖 Generated with [Claude Code](...)
+# That default is wrong here. This hook strips those lines mechanically so the
+# rule does not depend on anyone remembering to read the memory file.
+#
+# Installed 2026-08-04 after 26 commits in one session carried the trailer.
+
+MSG="$1"
+[ -f "$MSG" ] || exit 0
+
+BEFORE=$(wc -c < "$MSG")
+
+# Strip the offending trailers (case-insensitive on the key), plus any
+# blank lines they leave behind at the end of the message.
+sed -i \
+  -e '/^[Cc]o-[Aa]uthored-[Bb]y:.*[Cc]laude/d' \
+  -e '/^[Cc]o-[Aa]uthored-[Bb]y:.*anthropic\.com/d' \
+  -e '/^[Cc]laude-[Ss]ession:/d' \
+  -e '/^🤖 Generated with/d' \
+  -e '/^Generated with \[Claude Code\]/d' \
+  -e '/https:\/\/claude\.ai\/code\/session_/d' \
+  "$MSG"
+
+# trim trailing blank lines
+perl -0pi -e 's/\n+\z/\n/' "$MSG" 2>/dev/null || {
+  # perl absent: fall back to awk
+  awk 'BEGIN{n=0} {lines[NR]=$0} END{last=NR; while(last>0 && lines[last]~/^[[:space:]]*$/) last--; for(i=1;i<=last;i++) print lines[i]}' "$MSG" > "$MSG.tmp" && mv "$MSG.tmp" "$MSG"
+}
+
+AFTER=$(wc -c < "$MSG")
+if [ "$BEFORE" -ne "$AFTER" ]; then
+  echo "[commit-msg] stripped AI trailer — commits here are 0xRenSec only (memory/no-ai-trailer-on-repos.md)" >&2
+fi
+
+exit 0
